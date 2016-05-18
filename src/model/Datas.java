@@ -85,7 +85,6 @@ public class Datas extends Koneksi{
         } catch (Exception e) {
             return false;
         }
-        
     }
 
 }

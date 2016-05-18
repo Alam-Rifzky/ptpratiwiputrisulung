@@ -3,14 +3,32 @@ package doniapriliawan;
 
 import javax.swing.JOptionPane;
 import model.Datas;
-import view.Login;
+import view.*;
 
 
 public class DoniApriliawan {
 
     public static void main(String[] args) {
-        Login login = new Login();
-        login.jalankan();
+        //MyLogin login = new MyLogin();
+        
+        //MainMenu myMenu = new MainMenu();
+        try {
+           Login.showForm("buka");
+           //MyMenu menuCoba = new MyMenu(); 
+            //Penggunaan penggunaan = new Penggunaan();
+            //Pengembalian pengembalian = new Pengembalian();
+            //SearchKendaraan searchKendaraan = new SearchKendaraan();
+            //InputData inputData = new InputData();
+            //Coba cb = new Coba();
+        } catch (Exception e) {
+        
+        }
+        
+        
+        //myMenu.Jalankan();
+        
+        //login.jalankan();
+        //login.jalankan();
         //atas data = new Datas();
         //System.out.println(data.coba());
         //Messagebox.jalankan();
