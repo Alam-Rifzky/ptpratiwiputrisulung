@@ -113,6 +113,10 @@ public class SearchKendaraan extends JFrame{
         txtKataKunci.setBounds(400, 70, 310, 25);
         panel.add(txtKataKunci);
         
+        btnSearch = new JButton("Cari Kendaraan");
+        btnSearch.setBounds(10, 120, 150, 50);
+        panel.add(btnSearch);
+        
         //start table
         String [] columnNames = {"No","No Kendaraan", "Nama Kendaraan", "No. Plat Polisi", "Tahun Beli", "Warna"};
         Object [][] rows = {
@@ -129,7 +133,7 @@ public class SearchKendaraan extends JFrame{
         //gridView.setBounds(10, 120, 700, 300);
         //gridView.getColumn(0).setPreferredWidth(30);
         JScrollPane scrollPane = new JScrollPane(gridView);
-        scrollPane.setBounds(10, 120, 700, 300);
+        scrollPane.setBounds(10, 190, 700, 300);
         panel.add(scrollPane);
         //panel.add(gridView);
         

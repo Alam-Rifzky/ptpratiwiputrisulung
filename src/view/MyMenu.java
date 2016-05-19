@@ -93,13 +93,13 @@ public class MyMenu extends JFrame {
         JMenuBar menubar = new JMenuBar();
                 
         JMenu transactionMenu = new JMenu("Transaksi");
-     
+        //penggunaan
         JMenuItem peminjaman = new JMenuItem("Peminjaman");
         transactionMenu.add(peminjaman);
         peminjaman.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Pengembalian.showForm();
+                Penggunaan.showForm(); //bug is here
                 sembunyi();
             }
         });

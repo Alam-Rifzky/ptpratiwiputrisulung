@@ -231,7 +231,7 @@ public class Pengembalian extends JFrame{
         peminjaman.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Pengembalian.showForm();
+                Penggunaan.showForm();
                 sembunyi();
             }
         });
