@@ -2,15 +2,27 @@ package controller;
 import classes.Petugas;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.Datas;
+import model.*;
 import view.*;
 
 
 public class Core {
-
-
+    ModelPetugas mdPetugas;
+    Petugas petugas;
     
-
+    public boolean login(String username, String password){
+        try {
+            mdPetugas = new ModelPetugas();
+            petugas = new Petugas(username, "", "", password, "", "");
+            //if (!mdPetugas.) {
+                
+            //}
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
+    }
     
     
     
@@ -61,84 +73,5 @@ public class Core {
     
     }
     
-    /*
-    public void hideAndSeek(String from, String to){
-        if (from.equals("MainMenu")&&to.equals("DataKendaraan")) {
-            menuUtama.setVisible(false);
-            //dataKendaraan.setVisible(true);
-        }else if(from.equals("MainMenu")&&to.equals("FormKendaraan")){
-            menuUtama.setVisible(false);
-            formKendaraan.setVisible(true);
-        }else if(from.equals("MainMenu")&&to.equals("PengembalianKendaraan")){
-            menuUtama.setVisible(false);
-            pengembalianKendaraan.setVisible(true);
-        }else if(from.equals("MainMenu")&&to.equals("PenggunaanKendaraan")){
-            menuUtama.setVisible(false);
-            //penggunaanKendaraan.setVisible(true);
-        }else if(from.equals("MainMenu")&&to.equals("Login")){
-            menuUtama.setVisible(false);
-            //login.setVisible(true);
-        }else if(from.equals("DataKendaraan")&&to.equals("FormKendaraan")){
-            //dataKendaraan.setVisible(false);
-            formKendaraan.setVisible(true);
-        }else if(from.equals("DataKendaraan")&&to.equals("Login")){
-            //dataKendaraan.setVisible(false);
-            //login.setVisible(true);
-        }else if(from.equals("DataKendaraan")&&to.equals("MainMenu")){
-            //dataKendaraan.setVisible(false);
-            menuUtama.setVisible(true);
-        }else if(from.equals("DataKendaraan")&&to.equals("PengembalianKendaraan")){
-            //dataKendaraan.setVisible(false);
-            pengembalianKendaraan.setVisible(true);
-        }else if(from.equals("DataKendaraan")&&to.equals("PenggunaanKendaraan")){
-            //dataKendaraan.setVisible(false);
-            //penggunaanKendaraan.setVisible(true);
-        }else if(from.equals("FormKendaraan")&&to.equals("DataKendaraan")){
-            formKendaraan.setVisible(false);
-            //dataKendaraan.setVisible(true);
-        }else if(from.equals("FormKendaraan")&&to.equals("Login")){
-            formKendaraan.setVisible(false);
-            //login.setVisible(true);
-        }else if(from.equals("FormKendaraan")&&to.equals("MainMenu")){
-            formKendaraan.setVisible(false);
-            menuUtama.setVisible(true);
-        }else if(from.equals("FormKendaraan")&&to.equals("PengembalianKendaraan")){
-            formKendaraan.setVisible(false);
-            pengembalianKendaraan.setVisible(true);
-        }else if(from.equals("FormKendaraan")&&to.equals("PenggunaanKendaraan")){
-            formKendaraan.setVisible(false);
-            //penggunaanKendaraan.setVisible(true);
-        }else if(from.equals("PengembalianKendaraan")&&to.equals("DataKendaraan")){
-            pengembalianKendaraan.setVisible(false);
-            //dataKendaraan.setVisible(true);
-        }else if(from.equals("PengembalianKendaraan")&&to.equals("FormKendaraan")){
-            pengembalianKendaraan.setVisible(false);
-            formKendaraan.setVisible(true);
-        }else if(from.equals("PengembalianKendaraan")&&to.equals("Login")){
-            pengembalianKendaraan.setVisible(false);
-            //login.setVisible(true);
-        }else if(from.equals("PengembalianKendaraan")&&to.equals("MainMenu")){
-            pengembalianKendaraan.setVisible(false);
-            menuUtama.setVisible(true);
-        }else if(from.equals("PengembalianKendaraan")&&to.equals("PenggunaanKendaraan")){
-            pengembalianKendaraan.setVisible(false);
-            pengembalianKendaraan.setVisible(true);
-        }else if(from.equals("PenggunaanKendaraan")&&to.equals("DataKendaraan")){
-            //penggunaanKendaraan.setVisible(false);
-            //dataKendaraan.setVisible(true);
-        }else if(from.equals("PenggunaanKendaraan")&&to.equals("FormKendaraan")){
-            //penggunaanKendaraan.setVisible(false);
-            formKendaraan.setVisible(true);
-        }else if(from.equals("PenggunaanKendaraan")&&to.equals("Login")){
-            //penggunaanKendaraan.setVisible(false);
-            //login.setVisible(true);
-        }else if(from.equals("PenggunaanKendaraan")&&to.equals("MainMenu")){
-            //penggunaanKendaraan.setVisible(false);
-            menuUtama.setVisible(true);
-        }else if(from.equals("PenggunaanKendaraan")&&to.equals("PengembalianKendaraan")){
-            //penggunaanKendaraan.setVisible(false);
-            pengembalianKendaraan.setVisible(true);
-        }
-    }
-    */
+
 }

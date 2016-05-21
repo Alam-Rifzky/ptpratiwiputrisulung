@@ -1,70 +1,75 @@
 package classes;
 
 public class Pengguna {
+    String noTrans;
+    String tanggal;
+    String noKend;
+    String tujuan;
+    int kmGo;
+    String namaKend;
+    String warnaKend;
+    String thnKend;
+    String sopir;
+    String dataKerusakan;
+    int kmBack;
 
-    private String noUser;
-    private String nama;
-    private String jabatan;
-    private String status;
-    private String password;
-
-    public Pengguna() {
+    public Pengguna(String noTrans, String tanggal, String noKend, String tujuan, int kmGo, String namaKend, String warnaKend, String thnKend, String sopir, String dataKerusakan, int kmBack) {
+        this.noTrans = noTrans;
+        this.tanggal = tanggal;
+        this.noKend = noKend;
+        this.tujuan = tujuan;
+        this.kmGo = kmGo;
+        this.namaKend = namaKend;
+        this.warnaKend = warnaKend;
+        this.thnKend = thnKend;
+        this.sopir = sopir;
+        this.dataKerusakan = dataKerusakan;
+        this.kmBack = kmBack;
     }
 
-    public Pengguna(String noUser, String nama, String jabatan, String status, String password) {
-        this.noUser = noUser;
-        this.nama = nama;
-        this.jabatan = jabatan;
-        this.status = status;
-        this.password = password;
+    public String getNoTrans() {
+        return noTrans;
     }
 
-    public String getNoUser() {
-        return noUser;
+    public String getNamaKend() {
+        return namaKend;
     }
 
-    public void setNoUser(String noUser) {
-        this.noUser = noUser;
+    public String getDataKerusakan() {
+        return dataKerusakan;
     }
 
-    public String getNama() {
-        return nama;
+    public int getKmBack() {
+        return kmBack;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public int getKmGo() {
+        return kmGo;
     }
 
-    public String getJabatan() {
-        return jabatan;
+    public String getNoKend() {
+        return noKend;
     }
 
-    public void setJabatan(String jabatan) {
-        this.jabatan = jabatan;
+    public String getSopir() {
+        return sopir;
     }
 
-    public String getStatus() {
-        return status;
+    public String getTanggal() {
+        return tanggal;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getThnKend() {
+        return thnKend;
     }
 
-    public String getPassword() {
-        return password;
+    public String getTujuan() {
+        return tujuan;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getWarnaKend() {
+        return warnaKend;
     }
-
-
-    
-    
-    
-    
-    
     
     
 }

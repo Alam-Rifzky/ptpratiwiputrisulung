@@ -36,7 +36,7 @@ public class MyMenu extends JFrame {
         
         this.setJMenuBar(this.myMenu());
         this.add(root);
-        
+        this.setDefaultLookAndFeelDecorated(true);
         //this.setVisible(true);
     }
     
@@ -62,7 +62,7 @@ public class MyMenu extends JFrame {
         //panel.setLayout(null);
         
         try {
-            ImageIcon iconz = new ImageIcon(currentDirectory.getCanonicalPath()+"\\src\\images\\logo.png");
+            ImageIcon iconz = new ImageIcon("images/logo.png");
             logo = new JLabel(iconz,JLabel.CENTER);
             panel.add(logo);
             panel.setBorder(new EmptyBorder(0, 5, 0, 0));

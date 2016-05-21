@@ -2,6 +2,7 @@
 package doniapriliawan;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import model.Datas;
 import view.*;
 
@@ -13,6 +14,7 @@ public class DoniApriliawan {
         
         //MainMenu myMenu = new MainMenu();
         try {
+           UIManager.setLookAndFeel(new com.sun.java.swing.plaf.windows.WindowsLookAndFeel());
            Login.showForm("buka");
            //MyMenu menuCoba = new MyMenu(); 
             //Penggunaan penggunaan = new Penggunaan();

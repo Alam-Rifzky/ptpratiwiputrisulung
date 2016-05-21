@@ -10,6 +10,7 @@ public class Petugas {
     private String status;
     private String jabatan;
     
+    
     public Petugas() {
         
     }

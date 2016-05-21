@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 
@@ -31,6 +32,9 @@ public class Login extends JFrame {
     
     public Login() {
         try {
+            
+            
+            
             
             this.setSize(350, 250);
             this.setLocationRelativeTo(null);
@@ -46,7 +50,7 @@ public class Login extends JFrame {
             //this.add(coba);
             //this.setVisible(true);          
             
-            
+            this.setDefaultLookAndFeelDecorated(true);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -63,7 +67,7 @@ public class Login extends JFrame {
     JPanel pNorth(){
         JPanel panel = new JPanel(new GridLayout(1, 1));
         try {
-            ImageIcon iconz = new ImageIcon(currentDirectory.getCanonicalPath()+"\\src\\images\\logo.png");
+            ImageIcon iconz = new ImageIcon("images/logo.png");
             logo = new JLabel(iconz,JLabel.CENTER);
             panel.add(logo);
             return panel;
@@ -106,7 +110,7 @@ public class Login extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (txtUsername.getText().equals("rifzky")&&txtPassword.getText().equals("alam")) {
+                if (txtUsername.getText().equals("doni")&&txtPassword.getText().equals("1234")) {
                     Login.showForm("tutup");
                     MyMenu.showForm("buka");
                     destroyMe();

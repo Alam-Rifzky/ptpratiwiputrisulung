@@ -10,11 +10,16 @@ public class Kendaraan {
     private String warna;
     private String thnKendaraan;
 
-    public Kendaraan(String noKendaraan, String platNomor, String namaKendaraan, String merk, String noMesin, String warna, String thnKendaraan) {
+    public Kendaraan() {
+    }
+
+    
+    
+    public Kendaraan(String noKendaraan, String platNomor, String namaKendaraan, String noMesin, String warna, String thnKendaraan) {
         this.noKendaraan = noKendaraan;
         this.platNomor = platNomor;
         this.namaKendaraan = namaKendaraan;
-        this.merk = merk;
+        //this.merk = merk;
         this.noMesin = noMesin;
         this.warna = warna;
         this.thnKendaraan = thnKendaraan;

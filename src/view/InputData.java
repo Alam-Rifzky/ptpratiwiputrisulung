@@ -1,9 +1,12 @@
 package view;
 
+import classes.Kendaraan;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,9 +22,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import model.ModelKendaraan;
 
 public class InputData extends JFrame{
-    
+    ModelKendaraan mdKend;
     JLabel myLabel;
     String myForm = "inputDanEdit";
     
@@ -59,7 +63,7 @@ public class InputData extends JFrame{
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         try {
             File currentDirectory = new File(new File(".").getAbsolutePath());
-            ImageIcon iconz = new ImageIcon(currentDirectory.getCanonicalPath()+"\\src\\images\\logo.png");
+            ImageIcon iconz = new ImageIcon("images/logo.png");
             JLabel logo = new JLabel(iconz);
             
             //logo.setBounds(50, 50, 300, 300);
@@ -99,7 +103,7 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 0, 125, 50);
         panel.add(myLabel);
         
-        JTextField txtNoKendaraan = new JTextField();
+        final JTextField txtNoKendaraan = new JTextField();
         txtNoKendaraan.setBounds(150, 15, 240, 23);
         panel.add(txtNoKendaraan);
         
@@ -107,7 +111,7 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 40, 125, 50);
         panel.add(myLabel);
         
-        JTextField txtNamaKend = new JTextField();
+        final JTextField txtNamaKend = new JTextField();
         txtNamaKend.setBounds(150, 53, 240, 23);
         panel.add(txtNamaKend);
         
@@ -115,7 +119,7 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 80, 125, 50);
         panel.add(myLabel);        
 
-        JTextField txtPlatPolisi = new JTextField();
+        final JTextField txtPlatPolisi = new JTextField();
         txtPlatPolisi.setBounds(150, 93, 240, 23);
         panel.add(txtPlatPolisi);
         
@@ -123,7 +127,7 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 120, 125, 50);
         panel.add(myLabel);            
         
-        JTextField txtTahunBeli = new JTextField();
+        final JTextField txtTahunBeli = new JTextField();
         txtTahunBeli.setBounds(150, 133, 240, 23);
         panel.add(txtTahunBeli);        
         
@@ -132,30 +136,56 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 160, 125, 50);
         panel.add(myLabel);            
         
-        JTextField txtWarnaMobil = new JTextField();
+        final JTextField txtWarnaMobil = new JTextField();
         txtWarnaMobil.setBounds(150, 173, 240, 23);
         panel.add(txtWarnaMobil); 
                 
-        myLabel = new JLabel("Limit KM");
+        myLabel = new JLabel("No Mesin");
         myLabel.setBounds(10, 200, 125, 50);
         panel.add(myLabel);            
 
-        JTextField txtLimitKM = new JTextField();
-        txtLimitKM.setBounds(150, 213, 240, 23);
-        panel.add(txtLimitKM); 
+        final JTextField txtNoMesin = new JTextField();
+        txtNoMesin.setBounds(150, 213, 240, 23);
+        panel.add(txtNoMesin); 
         
         JButton btnInput = new JButton("Input Data");
         btnInput.setBounds(150, 250, 115, 30);
         panel.add(btnInput);
+        btnInput.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mdKend = new ModelKendaraan();
+                Kendaraan kend = new Kendaraan(txtNoKendaraan.getText(), txtPlatPolisi.getText(), txtNamaKend.getText(), txtNoMesin.getText(), txtWarnaMobil.getText(), txtTahunBeli.getText());
+                if (mdKend.insertDataKendaraan(kend)) {
+                    JOptionPane.showMessageDialog(null, "Data Berhasil Di Simpan", "Info", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Data Gagal Di Simpan", "Info", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         
         JButton btnReset = new JButton("Reset Data");
         btnReset.setBounds(275, 250, 115, 30);
         panel.add(btnReset);
+        btnReset.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtNamaKend.setText("");
+                txtNoKendaraan.setText("");
+                txtNoMesin.setText("");
+                txtPlatPolisi.setText("");
+                txtTahunBeli.setText("");
+                txtWarnaMobil.setText("");
+            }
+        });
+        
         
         return panel;
     }
     
     JPanel editData(){
+        mdKend = new ModelKendaraan();
         JPanel panel = new JPanel();
         panel.setLayout(null);
         
@@ -163,17 +193,18 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 0, 125, 50);
         panel.add(myLabel);
         
-        String [] contentsForCb = {"","coba","jajal","iseng","ikan"}; 
+        String [] contentsForCb = mdKend.selectPlatNomor(); 
         
-        JComboBox cbEditKend = new JComboBox(contentsForCb);
+        final JComboBox cbEditKend = new JComboBox(contentsForCb);
         cbEditKend.setBounds(150, 15, 240, 23);
         panel.add(cbEditKend);
+        
         
         myLabel = new JLabel("Nama Kendaraan");
         myLabel.setBounds(10, 40, 125, 50);
         panel.add(myLabel);
         
-        JTextField txtEditNamaKend = new JTextField();
+        final JTextField txtEditNamaKend = new JTextField();
         txtEditNamaKend.setBounds(150, 53, 240, 23);
         panel.add(txtEditNamaKend);        
         
@@ -181,7 +212,7 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 80, 125, 50);
         panel.add(myLabel);
         
-        JTextField txtEditNoKend = new JTextField();
+        final JTextField txtEditNoKend = new JTextField();
         txtEditNoKend.setBounds(150, 93, 240, 23);
         panel.add(txtEditNoKend);        
         
@@ -189,7 +220,7 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 120, 125, 50);        
         panel.add(myLabel);
         
-        JTextField txtEditTahunBeli = new JTextField();
+        final JTextField txtEditTahunBeli = new JTextField();
         txtEditTahunBeli.setBounds(150, 133, 240, 23);
         panel.add(txtEditTahunBeli);         
         
@@ -197,17 +228,17 @@ public class InputData extends JFrame{
         myLabel.setBounds(10, 160, 125, 50);
         panel.add(myLabel);
         
-        JTextField txtEditWarnaMobil = new JTextField();
+        final JTextField txtEditWarnaMobil = new JTextField();
         txtEditWarnaMobil.setBounds(150, 173, 240, 23);
         panel.add(txtEditWarnaMobil);         
         
-        myLabel = new JLabel("Limit KM");
+        myLabel = new JLabel("No Mesin");
         myLabel.setBounds(10, 200, 125, 50);
         panel.add(myLabel);  
         
-        JTextField txtEditLimitKM = new JTextField();
-        txtEditLimitKM.setBounds(150, 213, 240, 23);
-        panel.add(txtEditLimitKM);         
+        final JTextField txtEditNoMesin = new JTextField();
+        txtEditNoMesin.setBounds(150, 213, 240, 23);
+        panel.add(txtEditNoMesin);         
 
         JButton btnEdit = new JButton("Edit Data");
         btnEdit.setBounds(150, 250, 115, 30);
@@ -217,6 +248,42 @@ public class InputData extends JFrame{
         btnEditReset.setBounds(275, 250, 115, 30);
         panel.add(btnEditReset);
         
+        cbEditKend.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Kendaraan ken =  mdKend.selectByPlatNo(cbEditKend.getSelectedItem().toString());
+                txtEditNoKend.setText(ken.getNoKendaraan());
+                txtEditNamaKend.setText(ken.getNamaKendaraan());
+                txtEditNoMesin.setText(ken.getNoMesin());
+                txtEditTahunBeli.setText(ken.getThnKendaraan());
+                txtEditWarnaMobil.setText(ken.getWarna());
+            }
+        });
+        btnEditReset.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtEditNoKend.setText("");
+                txtEditNamaKend.setText("");
+                txtEditNoMesin.setText("");
+                txtEditTahunBeli.setText("");
+                txtEditWarnaMobil.setText("");
+                cbEditKend.setSelectedIndex(0);
+            }
+        });
+        
+        btnEdit.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (mdKend.editDataKend(new Kendaraan(txtEditNoKend.getText(), cbEditKend.getSelectedItem().toString(), txtEditNamaKend.getText(), txtEditNoMesin.getText(), txtEditWarnaMobil.getText(), txtEditTahunBeli.getText()))) {
+                    JOptionPane.showMessageDialog(null, "Data Berhasil Diubah", "Info", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data Gagal Diubah", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         return panel;
     }
     

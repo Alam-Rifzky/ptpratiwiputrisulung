@@ -1,5 +1,6 @@
 package view;
 
+import classes.Kendaraan;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -24,16 +26,18 @@ import javax.swing.event.MenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
+import model.ModelKendaraan;
 
 
 public class SearchKendaraan extends JFrame{
-    
+    ModelKendaraan mdKend;
     
     JLabel subTitle1;
     JLabel lblBerdasarkan,lblKataKunci;
     JButton btnSearch;
     JTextField txtBerdasarkan, txtKataKunci;
+    String [] isiComboBox = {"Pilih opsi cari","No Kendaraan","Nama Kendaraan","No Polisi", "No Mesin","Warna","Tahun Kendaraan"};
+    JComboBox cbBerdasarkan = new JComboBox(isiComboBox);
     JTable gridView;
     String myForm = "SearchKendaraan";
     
@@ -50,6 +54,7 @@ public class SearchKendaraan extends JFrame{
         root.add(pBody(),BorderLayout.CENTER);
         this.add(root);
         //this.setVisible(true);
+        this.setDefaultLookAndFeelDecorated(true);
     }
     
     public static void showForm(){
@@ -73,7 +78,7 @@ public class SearchKendaraan extends JFrame{
         
         try {
             File currentDirectory = new File(new File(".").getAbsolutePath());
-            ImageIcon iconz = new ImageIcon(currentDirectory.getCanonicalPath()+"\\src\\images\\logo.png");
+            ImageIcon iconz = new ImageIcon("images/logo.png");
             JLabel logo = new JLabel(iconz);
             //logo.setBounds(50, 50, 300, 300);
             panel.add(logo);
@@ -86,7 +91,8 @@ public class SearchKendaraan extends JFrame{
     }
     
     JPanel pBody(){
-        JPanel panel = new JPanel();
+        mdKend = new ModelKendaraan();
+        final JPanel panel = new JPanel();
         panel.setLayout(null);
         
         subTitle1 = new JLabel("Data Kendaraan");
@@ -105,9 +111,9 @@ public class SearchKendaraan extends JFrame{
         panel.add(lblBerdasarkan);
         
         //textBox
-        txtBerdasarkan = new JTextField();
-        txtBerdasarkan.setBounds(10, 70, 310, 25);
-        panel.add(txtBerdasarkan);
+        
+        cbBerdasarkan.setBounds(10, 70, 310, 25);
+        panel.add(cbBerdasarkan);
         
         txtKataKunci = new JTextField();
         txtKataKunci.setBounds(400, 70, 310, 25);
@@ -117,18 +123,83 @@ public class SearchKendaraan extends JFrame{
         btnSearch.setBounds(10, 120, 150, 50);
         panel.add(btnSearch);
         
+        final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        //btn action listener
+        btnSearch.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String atrSearch;
+                if (cbBerdasarkan.getSelectedItem().equals("No Kendaraan")) {
+                    atrSearch = "no_kendaraan";
+                    //System.out.println(atrSearch);
+                }else if(cbBerdasarkan.getSelectedItem().equals("Nama Kendaraan")){
+                    atrSearch = "nama_kendaraan";
+                    //System.out.println(atrSearch);
+                }else if(cbBerdasarkan.getSelectedItem().equals("No Polisi")){
+                    atrSearch = "no_polisi";
+                    //System.out.println(atrSearch);
+                }else if(cbBerdasarkan.getSelectedItem().equals("No Mesin")){
+                    atrSearch = "no_mesin";
+                    //System.out.println(atrSearch);
+                }else if(cbBerdasarkan.getSelectedItem().equals("Warna")){
+                    atrSearch = "warna";
+                    //System.out.println(atrSearch);
+                }else if(cbBerdasarkan.getSelectedItem().equals("Tahun Kendaraan")){
+                    atrSearch = "tahun_kendaraan";
+                    //System.out.println(atrSearch);
+                }else{
+                    atrSearch = "";
+                }
+                String [] newColumnNames = {"No","No Kendaraan", "Nama Kendaraan", "No. Plat Polisi", "Tahun Beli", "Warna"};
+                Kendaraan [] kend = mdKend.fetchByAttr(atrSearch, txtKataKunci.getText());
+                
+                
+                String [][] iseng = new String[kend.length][6];
+                
+                for (int i = 0; i < iseng.length; i++) {
+                    iseng[i][0] = Integer.toString(i);
+                    iseng[i][1] = kend[i].getNoKendaraan();
+                    iseng[i][2] = kend[i].getNamaKendaraan();
+                    iseng[i][3] = kend[i].getPlatNomor();
+                    iseng[i][4] = kend[i].getThnKendaraan();
+                    iseng[i][5] = kend[i].getWarna();
+                }
+  
+                DefaultTableModel model = new DefaultTableModel(iseng, newColumnNames);
+                gridView.setModel(model);
+                centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+                gridView.getColumnModel().getColumn(0).setPreferredWidth(25);
+                gridView.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+                model.fireTableDataChanged();
+                
+            }
+        });
+        
+        
         //start table
         String [] columnNames = {"No","No Kendaraan", "Nama Kendaraan", "No. Plat Polisi", "Tahun Beli", "Warna"};
-        Object [][] rows = {
-                             {"-","-","-","-","-","-"},{"-","-","-","-","-","-"},{"-","-","-","-","-","-"}
-                            };
+        Kendaraan [] kend = mdKend.fetchAll();
+
+                String [][] iseng = new String[kend.length][6];
+                
+                for (int i = 0; i < iseng.length; i++) {
+                    iseng[i][0] = Integer.toString(i);
+                    iseng[i][1] = kend[i].getNoKendaraan();
+                    iseng[i][2] = kend[i].getNamaKendaraan();
+                    iseng[i][3] = kend[i].getPlatNomor();
+                    iseng[i][4] = kend[i].getThnKendaraan();
+                    iseng[i][5] = kend[i].getWarna();
+                }
+        
         //DefaultTableModel tableModel = new DefaultTableModel(columnNames, 6);
-        gridView = new JTable(rows, columnNames);
+        gridView = new JTable(iseng, columnNames);
         
         gridView.getColumnModel().getColumn(0).setPreferredWidth(25);
         
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
         gridView.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         //gridView.setBounds(10, 120, 700, 300);
         //gridView.getColumn(0).setPreferredWidth(30);
@@ -136,6 +207,11 @@ public class SearchKendaraan extends JFrame{
         scrollPane.setBounds(10, 190, 700, 300);
         panel.add(scrollPane);
         //panel.add(gridView);
+        
+        
+        
+        
+        
         
         //end tabel
         return panel;

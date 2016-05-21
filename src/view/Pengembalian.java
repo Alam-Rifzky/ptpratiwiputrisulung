@@ -40,6 +40,7 @@ public class Pengembalian extends JFrame{
         root.add(pBody(),BorderLayout.CENTER);
         
         this.add(root);
+        this.setDefaultLookAndFeelDecorated(true);
         //this.setVisible(true);
     }
     
@@ -68,7 +69,7 @@ public class Pengembalian extends JFrame{
         JLabel logo;
         File currentDirectory = new File(new File(".").getAbsolutePath());
         try {
-            ImageIcon iconz = new ImageIcon(currentDirectory.getCanonicalPath()+"\\src\\images\\logo.png");
+            ImageIcon iconz = new ImageIcon("images/logo.png");
             logo = new JLabel(iconz);
             //logo.setBounds(50, 50, 300, 300);
             panel.add(logo);
@@ -196,6 +197,14 @@ public class Pengembalian extends JFrame{
         btnProses = new JButton("Proses");
         btnProses.setBounds(10, 500, 410, 50);
         panel.add(btnProses);
+        
+        btnProses.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
         lblSisaKm = new JLabel("KM Limit");
         lblSisaKm.setFont(new Font("Tahoma", Font.BOLD, 18));

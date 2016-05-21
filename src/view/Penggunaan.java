@@ -1,6 +1,7 @@
 
 package view;
 
+import classes.Pengguna;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -22,10 +23,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import model.ModelTransaksi;
 
 
 public class Penggunaan extends JFrame{
-    
+    ModelTransaksi mdlTrans;
     JLabel logo,lblUsername,lblNama;
     File currentDirectory = new File(new File(".").getAbsolutePath());
     String myForm = "Penggunaan";
@@ -43,6 +45,7 @@ public class Penggunaan extends JFrame{
         this.add(root);
         
         this.setJMenuBar(this.myMenu());
+        this.setDefaultLookAndFeelDecorated(true);
         //this.setVisible(true);
     }
     
@@ -61,7 +64,7 @@ public class Penggunaan extends JFrame{
         //panel.setLayout(null);
         
         try {
-            ImageIcon iconz = new ImageIcon(currentDirectory.getCanonicalPath()+"\\src\\images\\logo.png");
+            ImageIcon iconz = new ImageIcon("images/logo.png");
             logo = new JLabel(iconz);
             //logo.setBounds(50, 50, 300, 300);
             panel.add(logo);
@@ -80,7 +83,7 @@ public class Penggunaan extends JFrame{
         JLabel lblNoTransaksi,lblTanggal,lblNoKendaraan,lblNamaKendaraan,
                 lblThnKendaraan,lblWarna,lblKmBerangkat,lblKmKembali,
                 lblNamaPengguna,lblTujuan,lblDataKerusakan;
-        JTextField txtNoTransaksi,txtNoKendaraan,txtNamaKendaraan,txtThnKendaraan, txtWarna,
+        final JTextField txtNoTransaksi,txtNoKendaraan,txtNamaKendaraan,txtThnKendaraan, txtWarna,
                 txtKmBerangkat,txtKmKembali,txtNamaPengguna,txtTujuan,txtDataKerusakan;
         JButton btnSubmit;
         
@@ -185,9 +188,9 @@ public class Penggunaan extends JFrame{
         panel.add(lblNamaPengguna);
         
         //textField KM_Kembali
-        txtKmKembali = new JTextField();
-        txtKmKembali.setBounds(550, 103, 190, 25);
-        panel.add(txtKmKembali);
+        txtNamaPengguna = new JTextField();
+        txtNamaPengguna.setBounds(550, 103, 190, 25);
+        panel.add(txtNamaPengguna);
         
         lblTujuan = new JLabel("Tujuan/Trayek");
         lblTujuan.setBounds(400, 130, 150, 50);
@@ -212,6 +215,20 @@ public class Penggunaan extends JFrame{
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(400, 220, 135, 50);
         panel.add(btnSubmit);
+        
+        btnSubmit.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mdlTrans = new ModelTransaksi();
+                if (mdlTrans.peminjamanKendaraan(new Pengguna(txtNoTransaksi.getText(), txtNoTransaksi.getText(), txtNoKendaraan.getText(), txtTujuan.getText(), Integer.parseInt(txtKmBerangkat.getText()), txtNamaKendaraan.getText(), txtWarna.getText(), txtThnKendaraan.getText(), txtNamaPengguna.getText(), txtDataKerusakan.getText(),Integer.parseInt(txtKmKembali.getText())))){
+                    JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data Gagal Disimpan", "Info", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
         
         return panel;
     }

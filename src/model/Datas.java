@@ -78,7 +78,6 @@ public class Datas extends Koneksi{
             String query;
             query = "INSERT INTO `users` (`no_user`, `nama`, `jabatan`, `status`, `password`) "
                     + "VALUES ('" + petugas.getNoUser() + "', '" + petugas.getNama() + "', '" + petugas.getJabatan() + "', '" + petugas.getStatus() + "', '" + petugas.getPassword() + "')";
-            //INSERT INTO `doni`.`users` (`no_user`, `nama`, `jabatan`, `status`, `password`) VALUES ('123', 'Rifzky Alam', 'boss', 'okeh', '1234556'); <-- sample from phpmyadmin
             stmt.executeUpdate(query);
             stmt.close();
             return true;
